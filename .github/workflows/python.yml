@@ -11,6 +11,11 @@ on:
   workflow_dispatch:
 
 
+permissions: 
+  statuses: write
+  pull-requests: write
+
+
 jobs:
     
     build:
