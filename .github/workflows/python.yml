@@ -1,6 +1,15 @@
 name: Python CI
 
-on: [push, workflow_dispatch]
+
+on:
+  
+  push:
+    paths-ignore:
+      - "**/README.md"
+      - "docs/**"
+  
+  workflow_dispatch:
+
 
 jobs:
     
@@ -14,6 +23,7 @@ jobs:
         runs-on: ${{matrix.os}}
         
         steps:
+
             - name: Build information
               run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
 
