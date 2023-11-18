@@ -1,0 +1,74 @@
+name: Python CI
+
+on: [push, workflow_dispatch]
+
+jobs:
+    
+    build:
+        
+        strategy:
+            matrix:
+                os: [ubuntu-latest, macos-latest, windows-latest]
+                python: ["3.8", "3.9", "3.10", "3.11", "3.12"]
+        
+        runs-on: ${{matrix.os}}
+        
+        steps:
+            - name: Build information
+              run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
+
+            - name: Checkout code from ${{github.ref_name}}
+              uses: actions/checkout@v4
+            
+            - name: Get Diff
+              id: diff
+              uses: trilom/file-changes-action
+              with:
+                output: ','
+
+            - name: Print Diff
+              run: |
+                echo "Files changed:"
+                echo "${{steps.diff.outputs.files}}"
+
+            - name: Setup Python
+              uses: actions/setup-python@v4
+              with:
+                python-version: ${{matrix.python}}
+                cache: 'pip'
+            
+            - name: Upgrade Pip
+              run: python -m install --upgrade pip
+            
+            - name: Install Dependencies
+              run: pip install -r requirements.txt
+            
+            - name: Linting
+              run: |
+                pip install ruff
+                ruff --output-format=github src
+            
+            - name: Static Type Analysis
+              run: |
+                pip install mypy
+                mypy src
+            
+            - name: Run Tests
+              run: |
+                pip install pytest pytest-cov pytest-env pytest-asyncio
+                python -m pytest --junitxml=test-reports/tests.xml --cov-fail-under=70
+            
+            - name: Generate Coverage Report
+              run: python -m coverage xml -o test-reports/coverage.xml
+            
+            - name: Publish Test Results
+              uses: actions/upload-artifact@v3
+              with:
+                name: test-results
+                path: test-reports/tests.xml
+            
+            - name: Publish Code Coverage Results
+              uses: actions/upload-artifact@v3
+              with:
+                name: test-results
+                path: test-reports/coverage.xml
