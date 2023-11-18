@@ -1,1 +1,1 @@
-# Posty ![example workflow](https://github.com/kevdog824/Posty/actions/workflows/python.yml/badge.svg)
+# Posty ![example workflow](https://github.com/kevdog824/Posty/actions/workflows/python.yml/badge.svg) [![CodeQL](https://github.com/kevdog824/Posty/actions/workflows/github-code-scanning/codeql/badge.svg)](https://github.com/kevdog824/Posty/actions/workflows/github-code-scanning/codeql)
