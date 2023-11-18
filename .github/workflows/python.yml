@@ -22,7 +22,7 @@ jobs:
             
             - name: Get Diff
               id: diff
-              uses: trilom/file-changes-action
+              uses: trilom/file-changes-action@v1.2.3
               with:
                 output: ','
 

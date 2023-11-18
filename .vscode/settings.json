@@ -1,7 +1,0 @@
-{
-    "files.exclude": {
-        ".mypy_cache": true,
-        ".ruff_cache": true,
-        "__pycache__": true
-    }
-}
