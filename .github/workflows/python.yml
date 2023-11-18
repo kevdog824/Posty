@@ -30,7 +30,7 @@ jobs:
         steps:
 
             - name: Build Information
-              run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
+              run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"
 
             - name: Set Commit Status to Pending
               uses: ouzi-dev/commit-status-updater@v2
@@ -71,16 +71,16 @@ jobs:
             - name: Publish Test Results
               uses: actions/upload-artifact@v3
               with:
-                name: test-results
+                name: tests.xml
                 path: reports/tests.xml
             
             - name: Publish Code Coverage Results
               uses: actions/upload-artifact@v3
               with:
-                name: test-results
+                name: coverage.xml
                 path: reports/coverage.xml
 
-            - name: Update Commit status with Build Result
+            - name: Update Commit Status With Build Result
               if: always()
               uses: ouzi-dev/commit-status-updater@v2
               with:
