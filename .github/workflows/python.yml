@@ -38,7 +38,7 @@ jobs:
                 cache: 'pip'
             
             - name: Upgrade Pip
-              run: python -m install --upgrade pip
+              run: python -m pip install --upgrade pip
             
             - name: Install Dependencies
               run: pip install -r requirements.txt
