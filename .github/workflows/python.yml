@@ -56,19 +56,19 @@ jobs:
             - name: Run Tests
               run: |
                 pip install pytest pytest-cov pytest-env pytest-asyncio
-                python -m pytest --junitxml=test-reports/tests.xml --cov-fail-under=70
+                python -m pytest --junitxml=reports/tests.xml --cov --cov-fail-under=70
             
             - name: Generate Coverage Report
-              run: python -m coverage xml -o test-reports/coverage.xml
+              run: python -m coverage xml -o reports/coverage.xml
             
             - name: Publish Test Results
               uses: actions/upload-artifact@v3
               with:
                 name: test-results
-                path: test-reports/tests.xml
+                path: reports/tests.xml
             
             - name: Publish Code Coverage Results
               uses: actions/upload-artifact@v3
               with:
                 name: test-results
-                path: test-reports/coverage.xml
+                path: reports/coverage.xml

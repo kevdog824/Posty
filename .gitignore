@@ -4,5 +4,19 @@
 **/.venv
 
 
+### Python Tools
+
+**/.coverage
+**/.mypy_cache
+**/.ruff_cache
+**/.pytest_cache
+
+
+### Report
+
+/reports
+
+
 ### VSCode
+
 .vscode
