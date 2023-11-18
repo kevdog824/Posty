@@ -1,3 +1,3 @@
 # Posty
 
-![example workflow](https://github.com/github/docs/actions/workflows/python.yml/badge.svg)
+![example workflow](https://github.com/kevdog824/Posty/actions/workflows/python.yml/badge.svg)
