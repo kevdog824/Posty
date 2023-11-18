@@ -24,10 +24,10 @@ jobs:
         
         steps:
 
-            - name: Build information
+            - name: Build Information
               run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
 
-            - name: Checkout code from ${{github.ref_name}}
+            - name: Checkout Code From "${{github.ref_name}}"
               uses: actions/checkout@v4
 
             - name: Setup Python
