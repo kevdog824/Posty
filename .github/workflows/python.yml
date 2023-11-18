@@ -27,6 +27,9 @@ jobs:
             - name: Build Information
               run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
 
+            - name: Set Commit Status to Pending
+              uses: ouzi-dev/commit-status-updater@v2
+
             - name: Checkout Code From "${{github.ref_name}}"
               uses: actions/checkout@v4
 
@@ -71,3 +74,9 @@ jobs:
               with:
                 name: test-results
                 path: reports/coverage.xml
+
+            - name: Update Commit status with Build Result
+              if: always()
+              uses: ouzi-dev/commit-status-updater@v2
+              with:
+                status: "${{ job.status }}"
