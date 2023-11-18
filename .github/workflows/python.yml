@@ -19,17 +19,6 @@ jobs:
 
             - name: Checkout code from ${{github.ref_name}}
               uses: actions/checkout@v4
-            
-            - name: Get Diff
-              id: diff
-              uses: trilom/file-changes-action@v1.2.3
-              with:
-                output: ','
-
-            - name: Print Diff
-              run: |
-                echo "Files changed:"
-                echo "${{steps.diff.outputs.files}}"
 
             - name: Setup Python
               uses: actions/setup-python@v4
