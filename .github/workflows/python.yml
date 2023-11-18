@@ -1,6 +1,20 @@
 name: Python CI
 
-on: [push, workflow_dispatch]
+
+on:
+  
+  push:
+    paths-ignore:
+      - "**/README.md"
+      - "docs/**"
+  
+  workflow_dispatch:
+
+
+permissions: 
+  statuses: write
+  pull-requests: write
+
 
 jobs:
     
@@ -14,10 +28,14 @@ jobs:
         runs-on: ${{matrix.os}}
         
         steps:
-            - name: Build information
+
+            - name: Build Information
               run: echo "Testing with Python ${{matrix.python}} on ${{runner.os}}"            
 
-            - name: Checkout code from ${{github.ref_name}}
+            - name: Set Commit Status to Pending
+              uses: ouzi-dev/commit-status-updater@v2
+
+            - name: Checkout Code From "${{github.ref_name}}"
               uses: actions/checkout@v4
 
             - name: Setup Python
@@ -61,3 +79,9 @@ jobs:
               with:
                 name: test-results
                 path: reports/coverage.xml
+
+            - name: Update Commit status with Build Result
+              if: always()
+              uses: ouzi-dev/commit-status-updater@v2
+              with:
+                status: "${{ job.status }}"
